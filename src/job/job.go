@@ -6,7 +6,8 @@ import (
 	"strconv"
 	"time"
 )
-func TimedJob(ticker *time.Ticker, done chan bool){
+
+func TimedJob(ticker *time.Ticker, done chan bool) {
 	for {
 		select {
 		case <-done:
@@ -18,8 +19,7 @@ func TimedJob(ticker *time.Ticker, done chan bool){
 	}
 }
 func TimedJobStart() {
-
-	duration,_ := strconv.Atoi(config.DUMP_DURATION)
+	duration, _ := strconv.Atoi(config.DUMP_DURATION)
 	ticker := time.NewTicker(time.Duration(duration) * time.Second)
 	done := make(chan bool)
 	go TimedJob(ticker, done)

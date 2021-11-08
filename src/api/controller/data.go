@@ -8,8 +8,7 @@ import (
 	"net/http"
 )
 
-
-func Get(w http.ResponseWriter, r *http.Request){
+func Get(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	switch r.Method {
@@ -19,16 +18,16 @@ func Get(w http.ResponseWriter, r *http.Request){
 		if param1 == "" {
 
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(response.SetResponse(http.StatusBadRequest,""))
+			json.NewEncoder(w).Encode(response.SetResponse(http.StatusBadRequest, ""))
 			logger.Log.Println("key parameter is missing")
 			return
 		}
 
-		result,_ := data.GetValue(param1)
+		result, _ := data.GetValue(param1)
 
-		if result.Key == ""{
+		if result.Key == "" {
 			w.WriteHeader(http.StatusNotFound)
-			json.NewEncoder(w).Encode(response.SetResponse(http.StatusNotFound,""))
+			json.NewEncoder(w).Encode(response.SetResponse(http.StatusNotFound, ""))
 			return
 		}
 
@@ -43,7 +42,7 @@ func Get(w http.ResponseWriter, r *http.Request){
 
 }
 
-func Set(w http.ResponseWriter, r *http.Request){
+func Set(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	switch r.Method {
 	case http.MethodPost:
@@ -56,20 +55,18 @@ func Set(w http.ResponseWriter, r *http.Request){
 			return
 		}
 
-
 		if reqBody.Key == "" {
 			logger.Log.Println("Key missing")
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(response.SetResponse(http.StatusBadRequest,"Key missing!"))
+			json.NewEncoder(w).Encode(response.SetResponse(http.StatusBadRequest, "Key missing!"))
 			return
 		}
-		if reqBody.Value == ""{
+		if reqBody.Value == "" {
 			logger.Log.Println("Value missing")
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(response.SetResponse(http.StatusBadRequest,"Value missing!"))
+			json.NewEncoder(w).Encode(response.SetResponse(http.StatusBadRequest, "Value missing!"))
 			return
 		}
-
 
 		data.SetValue(reqBody)
 		w.WriteHeader(http.StatusOK)
@@ -78,18 +75,18 @@ func Set(w http.ResponseWriter, r *http.Request){
 
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		json.NewEncoder(w).Encode(response.SetResponse(http.StatusMethodNotAllowed,""))
+		json.NewEncoder(w).Encode(response.SetResponse(http.StatusMethodNotAllowed, ""))
 		return
 	}
 }
 
-func Flush(w http.ResponseWriter, r *http.Request){
+func Flush(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	switch r.Method {
 	case http.MethodDelete:
 		data.GlobalStore = make(map[string]string)
 		w.WriteHeader(http.StatusNoContent)
-		json.NewEncoder(w).Encode(response.SetResponse(http.StatusNoContent,""))
+		json.NewEncoder(w).Encode(response.SetResponse(http.StatusNoContent, ""))
 		return
 	}
 }
