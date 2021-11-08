@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  goys-app:
+    build:
+      context: ./
+      dockerfile: .docker/go.docker
+    environment:
+      - "SERVICE_PORT=8889"
+      - "RECORD_FREQ=60"
+      - "LOG_PATH=/app/goys/log"
+    ports:
+      - "8889:8889"
