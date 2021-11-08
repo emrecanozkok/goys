@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "c8105040-78a8-482c-812c-ae1ab8d1e1e9",
+		"name": "Goys",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://142.93.139.105:8889",
+					"protocol": "http",
+					"host": [
+						"142",
+						"93",
+						"139",
+						"105"
+					],
+					"port": "8889"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"test-key\",\n    \"value\": \"test-val\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://142.93.139.105:8889/set",
+					"protocol": "http",
+					"host": [
+						"142",
+						"93",
+						"139",
+						"105"
+					],
+					"port": "8889",
+					"path": [
+						"set"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Flush",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://142.93.139.105:8889/flush",
+					"protocol": "http",
+					"host": [
+						"142",
+						"93",
+						"139",
+						"105"
+					],
+					"port": "8889",
+					"path": [
+						"flush"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://142.93.139.105:8889/get?key=test-key",
+					"protocol": "http",
+					"host": [
+						"142",
+						"93",
+						"139",
+						"105"
+					],
+					"port": "8889",
+					"path": [
+						"get"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "test-key"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
