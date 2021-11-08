@@ -9,9 +9,10 @@ import (
 	"reflect"
 	"testing"
 )
+
 /*
 	Test For Handler Functions
- */
+*/
 
 func TestSet(t *testing.T) {
 	requestBody := map[string]string{
@@ -45,11 +46,9 @@ func TestSet(t *testing.T) {
 	}
 }
 
-
-
 func TestGet(t *testing.T) {
 
-	req, err := http.NewRequest("GET", fmt.Sprintf("/get?key=%s","key_test"),nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("/get?key=%s", "key_test"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -66,7 +65,7 @@ func TestGet(t *testing.T) {
 
 	var responseMap map[string]string
 
-	 expectedBody := map[string]string{
+	expectedBody := map[string]string{
 		"key":   "key_test",
 		"value": "value_test",
 	}
@@ -81,7 +80,7 @@ func TestGet(t *testing.T) {
 
 func TestSetMissingParams(t *testing.T) {
 	requestBody := map[string]string{
-		"key":   "key_test",
+		"key": "key_test",
 	}
 	bodyData, err := json.Marshal(requestBody)
 	req, err := http.NewRequest("POST", "/set", bytes.NewBuffer(bodyData))
@@ -103,7 +102,7 @@ func TestSetMissingParams(t *testing.T) {
 
 func TestGetWrongParam(t *testing.T) {
 
-	req, err := http.NewRequest("GET", fmt.Sprintf("/get?kesy=%s","key_test"),nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("/get?kesy=%s", "key_test"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -122,7 +121,7 @@ func TestGetWrongParam(t *testing.T) {
 
 func TestGetNonExistsKey(t *testing.T) {
 
-	req, err := http.NewRequest("GET", fmt.Sprintf("/get?key=%s","non_exist_key"),nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("/get?key=%s", "non_exist_key"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -141,13 +140,13 @@ func TestGetNonExistsKey(t *testing.T) {
 
 func TestFlush(t *testing.T) {
 
-	req, err := http.NewRequest("DELETE", "/flush",nil)
+	req, err := http.NewRequest("DELETE", "/flush", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	rr := httptest.NewRecorder()
-	handler := http.HandlerFunc(Get)
+	handler := http.HandlerFunc(Flush)
 
 	handler.ServeHTTP(rr, req)
 

@@ -12,7 +12,12 @@ If you have docker on your computer, you can run the following command.
 ```shell
 docker-compose up -d
 ```
+## Test
 
+You can run following command in ```src``` folder,if you want to test.
+```
+go test -v ./api
+```
 If it is run successfully, you can see the response of the health check function at **[localhost:8889](localhost:8889)**. (This will return you a blank page with 200 code.)
 
 ##Uri and parameters
