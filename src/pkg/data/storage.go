@@ -17,7 +17,7 @@ var (
 const fileName = "%d_backup.json"
 const fileFolder = "./tmp/"
 
-func FindLatestFile()(string){
+func FindLatestFile() string {
 
 	files, _ := ioutil.ReadDir(fileFolder)
 	var newestFile string = ""
@@ -26,6 +26,7 @@ func FindLatestFile()(string){
 		fi, err := os.Stat(fileFolder + f.Name())
 		if err != nil {
 			logger.Log.Printf(err.Error())
+			return ""
 		}
 		currTime := fi.ModTime().Unix()
 		if currTime > newestTime {
@@ -37,27 +38,28 @@ func FindLatestFile()(string){
 	return newestFile
 }
 
-func LoadFromFile()(bool){
+func LoadFromFile() bool {
 	latestFile := FindLatestFile()
-	if(latestFile == ""){
+	if latestFile == "" {
 		return false
 	}
 
-	fileFullPath := fmt.Sprintf("%s%s",fileFolder,latestFile)
+	fileFullPath := fmt.Sprintf("%s%s", fileFolder, latestFile)
 	jsonFile, err := os.ReadFile(fileFullPath)
 	// if we os.Open returns an error then handle it
 	if err != nil {
 		logger.Log.Printf(err.Error())
+		return false
 	}
 	err = json.Unmarshal(jsonFile, &GlobalStore)
 	if err != nil {
 		logger.Log.Println("error during loading json file")
 		return false
 	}
-	logger.Log.Printf("successfully Opened %s file",fileFullPath)
+	logger.Log.Printf("successfully Opened %s file", fileFullPath)
 	return true
 }
-func FileExists(fileFullPath string)(bool){
+func FileExists(fileFullPath string) bool {
 	_, err := os.Stat(fileFullPath)
 	if err == nil {
 		return true
@@ -68,23 +70,21 @@ func FileExists(fileFullPath string)(bool){
 	return false
 }
 
-
-func DeleteFile(fileFullPath string){
+func DeleteFile(fileFullPath string) {
 	e := os.Remove(fileFullPath)
 	if e != nil {
 		logger.Log.Printf(e.Error())
 	}
 }
 
-
-func DumpDataToFile()(bool)  {
+func DumpDataToFile() bool {
 	now := time.Now()
 	jsonData, err := json.Marshal(GlobalStore)
-	fileFullPath := fmt.Sprintf(fileFolder+fileName,now.Unix())
+	fileFullPath := fmt.Sprintf(fileFolder+fileName, now.Unix())
 	if err != nil {
 		panic(err)
 	}
-	if FileExists(fileFullPath) == true{
+	if FileExists(fileFullPath) == true {
 		logger.Log.Printf("file already exist, deleting")
 		DeleteFile(fileFullPath)
 	}
@@ -95,7 +95,7 @@ func DumpDataToFile()(bool)  {
 	}
 	defer jsonFile.Close()
 	jsonFile.Write(jsonData)
-	logger.Log.Printf("content wrote to %s",fileFullPath)
+	logger.Log.Printf("content wrote to %s", fileFullPath)
 	jsonFile.Close()
 
 	return true
