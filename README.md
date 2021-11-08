@@ -20,6 +20,8 @@ go test -v ./api
 ```
 If it is run successfully, you can see the response of the health check function at **[localhost:8889](localhost:8889)**. (This will return you a blank page with 200 code.)
 
+you can use to test by following url
+**[Goys Api](http://142.93.139.105:8889)**
 ##Uri and parameters
 
 |  Endpoint |  Method | Request Body | Description
