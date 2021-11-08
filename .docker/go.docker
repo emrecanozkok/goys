@@ -1,7 +1,7 @@
 FROM golang:1.17.3-alpine
 RUN apk add bash
 WORKDIR /app/goys
-COPY ../src/. /app/goys
+COPY ./src/. /app/goys
 RUN pwd
 RUN go build -o ./build/goys-app .
 EXPOSE 8889

@@ -22,9 +22,9 @@ If it is run successfully, you can see the response of the health check function
 
 ##Uri and parameters
 
-|  Endpoint |  Method | Request Body
-| ------------ | ------------ | ------------ |
-|  /set | POST  |  `{"key": "set-key","value": "set-value"} ` |
-|  /get?key={key} | GET  |      |
-| /flush | GET,POST | |
-| / | GET | |
+|  Endpoint |  Method | Request Body | Description
+| ------------ | ------------ | ------------ | ------------ |
+|  /set | POST  |  `{"key": "set-key","value": "set-value"} ` | Set Key Value |
+|  /get?key={key} | GET  |      | Get key which previously set  |
+| /flush | GET,POST | | Flush all data |
+| / | GET | | For health check |

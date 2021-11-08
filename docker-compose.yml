@@ -4,6 +4,8 @@ services:
     build:
       context: ./
       dockerfile: .docker/go.docker
+
+    restart: always
     environment:
       - "SERVICE_PORT=8889"
       - "RECORD_FREQ=60"
